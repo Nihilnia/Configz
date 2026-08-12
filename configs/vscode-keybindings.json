@@ -1,0 +1,10 @@
+[
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.terminal.new"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor"
+    }
+]

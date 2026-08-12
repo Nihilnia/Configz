@@ -1,0 +1,170 @@
+{
+  "name": "Gloria",
+  "type": "dark",
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "variable": "#ff0000",
+    "parameter": "#ff0000",
+    "property": "#ff0000",
+    "function": "#fdfdfd",
+    "method": "#fdfdfd",
+    "class": "#4ec9b0",
+    "type": "#4ec9b0",
+    "keyword": "#fdfdfd",
+    "string": "#40ff00"
+  },
+  "colors": {
+    "focusBorder": "#1f212b",
+    "foreground": "#fefefe",
+    "widget.shadow": "#030306",
+    "selection.background": "#0F52BA",
+    "errorForeground": "#fe4450",
+    "textLink.activeForeground": "#ffffff",
+    "textLink.foreground": "#4ec9b0",
+    "button.background": "#000c18",
+    "dropdown.background": "#030306",
+    "dropdown.listBackground": "#000c18",
+    "input.background": "#030306",
+    "scrollbar.shadow": "#030306",
+    "activityBar.background": "#000000",
+    "activityBar.foreground": "#ffffff",
+    "sideBar.background": "#000c18",
+    "sideBar.foreground": "#fefefe99",
+    "sideBarSectionHeader.background": "#000c18",
+    "menu.background": "#000c18",
+    "editorGroupHeader.tabsBackground": "#000c18",
+    "tab.activeBackground": "#030306",
+    "tab.inactiveBackground": "#030306",
+    "editor.background": "#000c18",
+    "editorLineNumber.foreground": "#808080",
+    "editorLineNumber.activeForeground": "#40FF00",
+    "editorCursor.foreground": "#ffffff",
+    "editor.selectionBackground": "#0F52BA",
+    "editorWidget.background": "#030306",
+    "statusBar.background": "#000c18",
+    "titleBar.activeBackground": "#030306",
+    "titleBar.inactiveBackground": "#000c18",
+    "terminal.foreground": "#40FF00",
+    "editorGutter.background": "#0606e6",
+    "editorOverviewRuler.findMatchForeground": "#c90077",
+    "editorBracketHighlight.foreground1": "#1e90ff",
+    "editorBracketHighlight.foreground2": "#1e90ff",
+    "editorBracketHighlight.foreground3": "#1e90ff",
+    "editorBracketHighlight.foreground4": "#1e90ff",
+    "editorBracketHighlight.foreground5": "#1e90ff",
+    "editorBracketHighlight.foreground6": "#1e90ff",
+    "editorBracketHighlight.unexpectedBracket.foreground": "#fe4450"
+  },
+  "tokenColors": [
+    {
+      "name": "Comment",
+      "scope": ["comment", "punctuation.definition.comment", "string.quoted.docstring.multi.python"],
+      "settings": {
+        "foreground": "#808080",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "String",
+      "scope": ["string", "string.quoted", "string.template", "punctuation.definition.string"],
+      "settings": {
+        "foreground": "#40ff00"
+      }
+    },
+    {
+      "name": "Keyword",
+      "scope": ["keyword", "keyword.control", "storage", "storage.type", "storage.modifier", "keyword.operator.new"],
+      "settings": {
+        "foreground": "#fdfdfd"
+      }
+    },
+    {
+      "name": "Brackets (Glowing)",
+      "scope": [
+        "meta.brace", 
+        "punctuation.definition.block", 
+        "punctuation.definition.array", 
+        "punctuation.definition.parameters", 
+        "punctuation.section.block", 
+        "punctuation.section.array", 
+        "punctuation.section.parens", 
+        "punctuation.section.class", 
+        "punctuation.section.method",
+        "punctuation.section.function"
+      ],
+      "settings": {
+        "foreground": "#1e90ff"
+      }
+    },
+    {
+      "name": "Number",
+      "scope": ["constant.numeric"],
+      "settings": {
+        "foreground": "#ffff00"
+      }
+    },
+    {
+      "name": "Types and Classes",
+      "scope": ["entity.name.type", "entity.name.class", "meta.attribute.class.html", "entity.other.inherited-class", "support.type", "support.class"],
+      "settings": {
+        "foreground": "#4ec9b0"
+      }
+    },
+    {
+      "name": "Variables and Parameters",
+      "scope": ["variable", "entity.name.variable", "variable.parameter", "variable.other", "support.variable", "meta.block variable", "variable.other.readwrite", "variable.language"],
+      "settings": {
+        "foreground": "#ff0000"
+      }
+    },
+    {
+      "name": "Function",
+      "scope": ["entity.name.function", "variable.function", "support.function", "meta.function-call"],
+      "settings": {
+        "foreground": "#fdfdfd"
+      }
+    },
+    {
+      "name": "Object Properties",
+      "scope": ["variable.other.property", "meta.property.object", "support.type.property-name"],
+      "settings": {
+        "foreground": "#ff0000"
+      }
+    },
+    {
+      "name": "Regex",
+      "scope": ["string.regexp", "constant.character.escape"],
+      "settings": {
+        "foreground": "#D16969"
+      }
+    },
+    {
+      "name": "Constants",
+      "scope": ["constant", "constant.language"],
+      "settings": {
+        "foreground": "#fefefe"
+      }
+    },
+    {
+      "name": "HTML/XML Tag",
+      "scope": ["entity.name.tag", "punctuation.definition.tag"],
+      "settings": {
+        "foreground": "#569CD6"
+      }
+    },
+    {
+      "name": "Operator",
+      "scope": ["keyword.operator"],
+      "settings": {
+        "foreground": "#fefefe"
+      }
+    },
+    {
+      "name": "Punctuation (Non-glowing fallback)",
+      "scope": ["punctuation", "meta.delimiter"],
+      "settings": {
+        "foreground": "#fefefe"
+      }
+    }
+  ]
+}

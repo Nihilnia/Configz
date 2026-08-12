@@ -1,0 +1,801 @@
+/* ================================================================
+   1. ROOT VARIABLES
+   ================================================================ */
+:root {
+  /* Core chrome colors */
+  --toolbar-bgcolor: #000000 !important;
+  --lwt-accent-color: #000000 !important;
+  --tabpanel-background-color: #000000 !important;
+  --toolbar-field-background-color: #000000 !important;
+  --toolbar-field-focus-background-color: #000000 !important;
+
+  /* Kill separators */
+  --tabs-navbar-shadow-size: 0px !important;
+  --tabs-navbar-separator-color: transparent !important;
+  --chrome-content-separator-color: transparent !important;
+  --lwt-tabs-border-color: transparent !important;
+  --toolbox-border-bottom-color: transparent !important;
+
+  /* Panel variables */
+  --panel-background: #000000 !important;
+  --panel-color: #ffffff !important;
+  --panel-border-color: transparent !important;
+  --panel-separator-color: #333333 !important;
+  --arrowpanel-background: #000000 !important;
+  --arrowpanel-color: #ffffff !important;
+  --arrowpanel-border-color: transparent !important;
+}
+
+/* ================================================================
+   2. GLOBAL (scrollbars & text selection)
+   ================================================================ */
+* { 
+  scrollbar-width: thin !important;
+  scrollbar-color: #700606 #000000 !important;
+}
+
+/* Selection color, applied everywhere it can possibly apply */
+#urlbar-input::selection,
+#searchbar-input::selection,
+.urlbar-input::selection,
+input::selection,
+textarea::selection,
+#main-window ::selection,
+::selection,
+*::selection {
+  background-color: #700606 !important;
+  color: #ffffff !important;
+}
+
+/* ================================================================
+   3. WINDOW CHROME & TOOLBARS
+   ================================================================ */
+#nav-bar,
+#TabsToolbar,
+#titlebar,
+#urlbar-background {
+  background-color: #000000 !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+#navigator-toolbox {
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Hide native Firefox separator lines */
+#navigator-toolbox::after,
+#navigator-toolbox::before,
+#nav-bar::after,
+#nav-bar::before,
+#titlebar::after,
+#titlebar::before {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Bookmarks bar (Static, no auto-hide) */
+:root:not([inFullscreen]):not([inDOMFullscreen]) #navigator-toolbox {
+  position: relative !important;
+  z-index: 10 !important;
+  --uc-bm-height: 28px;  /* Standard Bookmarks bar height */
+  
+  border: none !important;
+  box-shadow: none !important;
+}
+
+:root:not([inFullscreen]):not([inDOMFullscreen]) #titlebar,
+:root:not([inFullscreen]):not([inDOMFullscreen]) #nav-bar {
+  position: relative !important;
+  z-index: 10 !important; 
+  background-color: #000000 !important;
+}
+
+/* Ensure the URL bar is always perfectly visible (but NOT in fullscreen,
+   otherwise it blocks Firefox's native fullscreen auto-hide) */
+:root:not([inFullscreen]):not([inDOMFullscreen]) #nav-bar {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+/* ================================================================
+   FULLSCREEN FIX
+   Let Firefox fully hide the toolbox/tabs/urlbar when a page (e.g. a
+   YouTube video) or the browser itself goes fullscreen, instead of
+   the rules above forcing them to stay visible/on top.
+   ================================================================ */
+:root[inFullscreen] #navigator-toolbox,
+:root[inDOMFullscreen] #navigator-toolbox,
+:root[inFullscreen] #titlebar,
+:root[inDOMFullscreen] #titlebar,
+:root[inFullscreen] #nav-bar,
+:root[inDOMFullscreen] #nav-bar {
+  opacity: 0 !important;
+  visibility: collapse !important;
+  pointer-events: none !important;
+  transform: translateY(-100%) !important;
+}
+
+#PersonalToolbar {
+  background-color: #000000 !important;
+  box-sizing: border-box !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  
+  height: var(--uc-bm-height) !important;
+  min-height: var(--uc-bm-height) !important;
+  max-height: var(--uc-bm-height) !important;
+  padding: 0 !important;
+}
+
+/* #main-button was likely hiding dialog buttons */
+/* #main-button { display: none !important; } */
+
+/* ================================================================
+   4. TABS
+   ================================================================ */
+.tab-background,
+.tab-background[selected="true"] {
+  background-color: #000000 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.tabbrowser-tab::before,
+.tabbrowser-tab::after,
+.tab-separator,
+.tab-line,
+.tab-context-line {
+  display: none !important;
+}
+
+.tabbrowser-tab {
+}
+
+.tabbrowser-tab:hover {
+  transform: translateY(-2px) !important;
+}
+
+#tab-preview-panel {
+  display: none !important;
+}
+
+/* Active tab "ember" gradient indicator */
+.tabbrowser-tab[selected="true"] .tab-background {
+  position: relative !important;
+  border-radius: 4px 4px 0 0 !important;
+  overflow: hidden !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-label,
+.tabbrowser-tab[selected="true"] .tab-text {
+  color: red !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-close-button {
+  color: #2b0000 !important;
+}
+
+.tabbrowser-tab .tab-background::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 2px !important;
+  z-index: 2 !important;
+  opacity: 0;
+  background-image: linear-gradient(90deg, #000000 0%, #000000 20%, #8b0000 50%, #000000 80%, #000000 100%);
+  background-size: 200% 100%;
+  background-position: 50% 0;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background::before {
+  opacity: 1 !important;
+}
+
+
+
+.tabbrowser-tab[usercontextid] .tab-background::before {
+  background-image: linear-gradient(90deg, #000000 0%, #000000 20%, var(--identity-icon-color) 50%, #000000 80%, #000000 100%);
+}
+
+#tabs-newtab-button > .toolbarbutton-icon {
+  fill: #700606 !important;
+}
+
+#tabs-newtab-button:hover > .toolbarbutton-icon {
+  fill: revert !important;
+}
+
+#tabs-newtab-button:hover {
+  color: transparent !important;
+}
+
+/* ================================================================
+   5. URL BAR
+   ================================================================ */
+#urlbar {
+  --toolbar-field-background-color: #000000 !important;
+  --toolbar-field-focus-background-color: #000000 !important;
+  --lwt-toolbar-field-background-color: #000000 !important;
+  --lwt-toolbar-field-focus-background-color: #000000 !important;
+  --urlbar-results-background-color: #000000 !important;
+  --urlbar-background-color: #000000 !important;
+  --urlbar-focused-bg-color: #000000 !important;
+  --urlbar-bg-color: #000000 !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+#urlbar-background,
+#urlbar[focused] > #urlbar-background,
+#urlbar[open] > #urlbar-background,
+.urlbar-background,
+:root[lwtheming] #urlbar-background {
+  background-color: #000000 !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+#urlbar-input-container,
+#urlbar-input-container:hover,
+#urlbar-input-container[focused],
+.urlbar-input-container {
+  background-color: #000000 !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Results dropdown */
+.urlbarView,
+:root[lwtheming] .urlbarView,
+#urlbar-results,
+.urlbarView-body-outer,
+.urlbarView-body-inner,
+.urlbarView-results,
+.urlbarView-row,
+.urlbarView-row-inner,
+#search-settings-subview {
+  background-color: #000000 !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#urlbar-results * {
+  color: #ffffff !important;
+}
+
+#urlbar-input::placeholder,
+.urlbarView-row * {
+  color: #ffffff !important;
+}
+
+#urlbar-input::placeholder {
+  opacity: 0 !important;
+}
+
+.urlbarView-row[selected] {
+  background-color: #1a1a1a !important;
+}
+
+/* Final say on input text color (overrides the white above) */
+#urlbar-input {
+  color: #700606 !important;
+}
+
+#page-action-buttons {
+  color: #700606 !important;
+}
+
+/* Search mode indicator (the engine icon button in the URL bar) */
+#urlbar-search-mode-indicator {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+#urlbar-search-mode-indicator:hover {
+  background-color: #1a1a1a !important;
+}
+
+/* ================================================================
+   6. IDENTITY & PROTECTIONS PANELS (Shield / Lock popups)
+   ================================================================ */
+#identity-popup,
+#protections-popup,
+#identity-popup .panel-arrowcontent,
+#protections-popup .panel-arrowcontent {
+  --arrowpanel-background: #000000 !important;
+  --panel-background: #000000 !important;
+  background-color: #000000 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#identity-popup-securityView,
+#identity-popup-permissionsView,
+#protections-popup-multiView,
+#protections-popup-footer,
+.identity-popup-container,
+.protections-popup-container,
+.panel-subview-body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* mainView / viewstack are forced transparent, overriding the black above */
+#identity-popup-mainView,
+#protections-popup-mainView,
+.panel-viewstack {
+  background-color: transparent !important;
+}
+
+#identity-popup-mainView,
+#protections-popup-mainView {
+  color: #ffffff !important;
+}
+
+#identity-popup *,
+#protections-popup * {
+  color: #ffffff !important;
+}
+
+panelview {
+  background-color: #000000 !important;
+}
+
+#identity-box {
+  background-color: #000000 !important;
+  border: none !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+}
+
+#identity-box:hover {
+  background-color: #1a1a1a !important;
+}
+
+#identity-icon-box,
+#identity-permission-box,
+.identity-box-button {
+  background-color: #000000 !important;
+  border: none !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+}
+
+#identity-icon-label {
+  color: #700606 !important;
+}
+
+/* Icon recoloring (shield/lock, extensions, containers, etc.) */
+#_testpilot-containers-browser-action,
+#unified-extensions-button,
+#PanelUI-button,
+#trust-icon-container,
+#identity-icon {
+  fill: #700606 !important;
+}
+
+#_testpilot-containers-browser-action:hover,
+#unified-extensions-button:hover,
+#PanelUI-button:hover,
+#trust-icon-container:hover,
+#identity-icon:hover {
+  fill: revert !important;
+}
+
+/* ================================================================
+   7. NAVIGATION BUTTONS (back / forward / reload)
+   ================================================================ */
+#back-button > .toolbarbutton-icon,
+#forward-button > .toolbarbutton-icon {
+  fill: #700606 !important;
+}
+
+#back-button:hover > .toolbarbutton-icon,
+#forward-button:hover > .toolbarbutton-icon {
+  fill: revert !important;
+}
+
+#back-button:hover,
+#forward-button:hover {
+  color: transparent !important;
+}
+
+#reload-button > .toolbarbutton-icon {
+  fill: #700606 !important;
+}
+
+#reload-button:hover > .toolbarbutton-icon {
+  fill: revert !important;
+}
+
+#reload-button:active > .toolbarbutton-icon {
+  fill: revert !important;
+}
+
+/* ================================================================
+   8. BOOKMARKS TOOLBAR & MISC BUTTONS
+   ================================================================ */
+toolbarbutton.bookmark-item:not(.subviewbutton) {
+  &:not([disabled], [open]):hover {
+    background-color: #2b0000 !important;
+  }
+}
+
+/* Targets the bookmark folder when it is clicked/open */
+toolbarbutton.bookmark-item[open="true"],
+toolbarbutton.bookmark-item[open] {
+  background-color: #2b0000 !important; 
+  color: #ffffff !important;
+  --toolbarbutton-active-background: #2b0000 !important;
+  --toolbarbutton-hover-background: #2b0000 !important;
+}
+
+#nav-bar-customization-target > toolbarbutton,
+#nav-bar-customization-target > toolbaritem {
+  color: transparent !important;
+}
+
+#star-button-box .toolbarbutton-icon {
+  fill: #700606 !important;
+}
+
+#star-button-box:hover .toolbarbutton-icon {
+  fill: revert !important;
+}
+
+#star-button-box:hover {
+  color: transparent !important;
+}
+
+.close-icon:hover {
+  color: red !important;
+}
+
+/* ================================================================
+   9. MENUS & CONTEXT MENUS
+   ================================================================ */
+menupopup, popup,
+menupopup menuitem, menupopup menu,
+menupopup menuseparator {
+  appearance: none !important;
+  background-color: transparent !important;
+  color: red !important;
+  border: none !important;
+}
+
+menupopup, popup {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  --menu-background-color: rgba(0, 0, 0, 0.8) !important;
+  --panel-background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(15px) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.8) !important;
+}
+
+.popup-internal-box,
+.menupopup-arrowscrollbox,
+menupopup scrollbox {
+  background: transparent !important;
+  appearance: none !important;
+}
+
+menupopup menuitem, menupopup menu {
+  border-radius: 4px !important;
+  margin: 2px 4px !important;
+}
+
+menupopup menuitem:hover,
+menupopup menu:hover,
+menupopup menuitem[_moz-menuactive="true"],
+menupopup menu[_moz-menuactive="true"],
+menupopup menu[open="true"] {
+  background-color: #1a1a1a !important;
+  color: red !important;
+}
+
+menupopup menuseparator {
+  appearance: none !important;
+  margin: 2px 0 !important;
+  padding: 0 !important;
+  border-top: 1px solid #333333 !important;
+}
+
+/* ================================================================
+   10. SIDEBARS (History, Bookmarks, etc.)
+   ================================================================ */
+#sidebar-box,
+.sidebar-panel,
+#sidebar-header,
+#sidebar {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* Make sure the X button in the sidebar is visible */
+#sidebar-close {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  fill: #ffffff !important;
+  color: #ffffff !important;
+}
+
+#sidebar-close:hover {
+  fill: #700606 !important;
+  color: #700606 !important;
+}
+
+/* ================================================================
+   11. FIND BAR (Ctrl+F)
+   ================================================================ */
+findbar {
+  position: absolute !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  top: 15px !important; 
+  right: 20px !important;
+  min-width: 350px !important;
+  width: max-content !important;
+  background-color: rgba(10, 10, 10, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 40px !important; /* Sleek pill shape */
+  padding: 6px 14px !important;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.8) !important;
+  z-index: 100 !important;
+}
+
+findbar[hidden] {
+  transform: translateY(-30px) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Force the inner container to be a row so buttons don't drop down */
+findbar .findbar-container,
+.findbar-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  width: max-content !important;
+  flex-shrink: 0 !important;
+}
+
+/* Custom Textbox */
+findbar .findbar-textbox {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  padding: 4px 14px !important;
+  margin-right: 8px !important;
+  width: 180px !important;
+}
+
+findbar .findbar-textbox:focus {
+  border-color: #700606 !important;
+  background-color: rgba(112, 6, 6, 0.1) !important;
+  outline: none !important;
+}
+
+/* Hide the search icon inside textbox if present */
+.findbar-textbox:-moz-locale-dir(ltr) {
+  background-image: none !important;
+}
+
+/* Custom Buttons (Up, Down, Close) */
+findbar .findbar-find-previous,
+findbar .findbar-find-next,
+findbar .findbar-closebutton {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 50% !important;
+  padding: 6px !important;
+  margin: 0 2px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  flex-shrink: 0 !important;
+  fill: #ffffff !important;
+}
+
+findbar .findbar-find-previous:hover,
+findbar .findbar-find-next:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  transform: scale(1.1) !important;
+}
+
+findbar .findbar-closebutton {
+  margin-left: 8px !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0 !important;
+  padding-left: 12px !important;
+}
+
+findbar .findbar-closebutton:hover {
+  background-color: transparent !important;
+  fill: #ff4d4d !important;
+  transform: scale(1.1) !important;
+}
+
+findbar .findbar-closebutton > .toolbarbutton-icon {
+  border-radius: 50% !important;
+  padding: 4px !important;
+}
+
+findbar .findbar-closebutton:hover > .toolbarbutton-icon {
+  background-color: rgba(255, 77, 77, 0.2) !important;
+}
+
+/* Style checkboxes (Highlight All, Match Case, Whole Words) as sleek buttons */
+findbar checkbox {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+  margin: 0 4px !important;
+  min-height: 28px !important;
+  width: max-content !important;
+  flex-shrink: 0 !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  opacity: 0.7 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+findbar checkbox:hover {
+  opacity: 1 !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+findbar checkbox[checked="true"] {
+  opacity: 1 !important;
+  background-color: rgba(112, 6, 6, 0.4) !important;
+  color: #ff4d4d !important;
+  fill: #ff4d4d !important;
+}
+
+/* Hide native checkbox ticks if they bleed through */
+findbar checkbox .checkbox-check {
+  display: none !important;
+}
+
+/* Ensure labels inside checkboxes don't wrap and overflow */
+findbar checkbox .checkbox-label-box,
+findbar checkbox .checkbox-label {
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* ================================================================
+   12. TOOLTIPS
+   ================================================================ */
+tooltip {
+  appearance: none !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #333333 !important;
+  padding: 4px !important;
+}
+
+
+
+
+
+/* ================================================================
+   HIDE "OPEN ALL IN TABS" IN BOOKMARKS FOLDER MENUS
+   ================================================================ */
+.openintabs-menuitem,
+#context-openAllInTabs,
+#placesContext_openContainer\:tabs,
+menupopup > menuitem[label="Open All in Tabs"] {
+  display: none !important;
+}
+
+menuseparator:has(+ .openintabs-menuitem) {
+  display: none !important;
+}
+
+
+
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* AI */
+#PlacesToolbarItems .bookmark-item[container][label="AI"] {
+  list-style-image: url("icons/ai.png") !important;
+}
+
+/* The West */
+#PlacesToolbarItems .bookmark-item[container][label="The West"] {
+  list-style-image: url("icons/thewest.png") !important;
+}
+
+/* CS */
+#PlacesToolbarItems .bookmark-item[container][label="CS"] {
+  list-style-image: url("icons/cs.png") !important;
+}
+
+/* Skyrim */
+#PlacesToolbarItems .bookmark-item[container][label="Skyrim"] {
+  list-style-image: url("icons/skyrim.png") !important;
+}
+
+/* Images */
+#PlacesToolbarItems .bookmark-item[container][label="Images"] {
+  list-style-image: url("icons/images.png") !important;
+}
+
+/* Music */
+#PlacesToolbarItems .bookmark-item[container][label="Music"] {
+  list-style-image: url("icons/music.png") !important;
+}
+
+/* Mail */
+#PlacesToolbarItems .bookmark-item[container][label="Mail"] {
+  list-style-image: url("icons/mail.png") !important;
+}
+
+/* CODE */
+#PlacesToolbarItems .bookmark-item[container][label="CODE"] {
+  list-style-image: url("icons/code.png") !important;
+}
+
+/* BS */
+#PlacesToolbarItems .bookmark-item[container][label="BS"] {
+  list-style-image: url("icons/bs.png") !important;
+}
+
+/* Cloud */
+#PlacesToolbarItems .bookmark-item[container][label="Cloud"] {
+  list-style-image: url("icons/cloud.png") !important;
+}
+
+/* Language */
+#PlacesToolbarItems .bookmark-item[container][label="Language"] {
+  list-style-image: url("icons/language.png") !important;
+}
+
+/* Gaming */
+#PlacesToolbarItems .bookmark-item[container][label="Gaming"] {
+  list-style-image: url("icons/gaming.png") !important;
+}
+

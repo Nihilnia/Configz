@@ -1,0 +1,82 @@
+/* ================================================================
+   USER CONTENT CSS
+   Applies to Firefox internal pages (about:preferences, etc.)
+   ================================================================ */
+
+@-moz-document url-prefix(about:), url-prefix(chrome:) {
+  :root {
+    --in-content-page-background: #000000 !important;
+    --in-content-text-color: #ffffff !important;
+    --in-content-page-color: #ffffff !important;
+    --in-content-box-background: #1a1a1a !important;
+    --in-content-box-background-hover: #333333 !important;
+    --in-content-box-border-color: #333333 !important;
+    --in-content-primary-button-background: #700606 !important;
+    --in-content-primary-button-background-hover: #8b0000 !important;
+    --in-content-primary-button-text-color: #ffffff !important;
+  }
+
+  body {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+  
+  /* Selection color for internal pages */
+  ::selection {
+    background-color: #700606 !important;
+    color: #ffffff !important;
+  }
+
+  a {
+    color: #ff4d4d !important;
+  }
+}
+
+/* ================================================================
+   GLOBAL WEB CONTENT
+   Applies to all webpages
+   ================================================================ */
+
+::selection {
+  background-color: #700606 !important;
+  color: #ffffff !important;
+}
+
+::-moz-selection {
+  background-color: #700606 !important;
+  color: #ffffff !important;
+}
+
+/* ================================================================
+   NEW TAB PAGE
+   ================================================================ */
+@-moz-document url("about:newtab"), url("about:home") {
+  body {
+    background-color: #000000 !important;
+    --newtab-background-color: #000000 !important;
+    --newtab-text-primary-color: #ffffff !important;
+    --newtab-search-background-color: #1a1a1a !important;
+    --newtab-search-border-color: #700606 !important;
+    --newtab-element-hover-color: #333333 !important;
+  }
+  
+  /* Pill-shaped search bar */
+  .search-inner-wrapper {
+    border-radius: 30px !important;
+    box-shadow: 0 4px 15px rgba(112, 6, 6, 0.3) !important;
+  }
+  .search-inner-wrapper:hover, .search-inner-wrapper.active {
+    box-shadow: 0 6px 20px rgba(112, 6, 6, 0.6) !important;
+  }
+  
+  /* Glassmorphism pinned sites */
+  .top-site-outer .top-site-inner {
+    background-color: rgba(26, 26, 26, 0.6) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  .top-site-outer:hover .top-site-inner {
+    transform: translateY(-4px) !important;
+  }
+}

@@ -1,0 +1,47 @@
+{
+	"name": "gloria-theme",
+	"displayName": "プロジェクト_Gloria",
+	"description": "Temet Nosce",
+	"version": "1.0.2",
+	"icon": "nihilZone.jpg",
+	"author": "Nihil",
+	"publisher": "Nihil",
+	"engines": {
+		"vscode": "^1.33.0"
+	},
+	"extensionKind": [
+		"ui"
+	],
+	"categories": [
+		"Themes"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./src/extension.js",
+	"contributes": {
+		"themes": [
+			{
+				"label": "Gloria",
+				"uiTheme": "vs-dark",
+				"path": "./themes/gloria-color-theme.json"
+			}
+		],
+		"commands": [],
+		"configuration": {
+			"title": "Gloria",
+			"properties": {
+				"gloria.brightness": {
+					"type": "number",
+					"default": 0.45,
+					"description": "Set the brightness value for the glow effect. 0.0 is fully transparent and 1.0 is fully bright"
+				},
+				"gloria.disableGlow": {
+					"type": "boolean",
+					"default": false,
+					"description": "Disable the glow effect, but show editor chrome updates"
+				}
+			}
+		}
+	}
+}

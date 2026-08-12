@@ -1,0 +1,12 @@
+# Binaries (Too large for GitHub or environment specific)
+mpv.exe
+d3dcompiler_43.dll
+mpv.com
+
+# Personal Data & Cache
+portable_config/cache/
+portable_config/mpv-history.txt
+**/*.bak
+
+# Logs
+**.log
