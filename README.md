@@ -38,14 +38,18 @@ Inside the `configs` directory, you'll find custom profiles and configurations f
 *   **Windows Terminal** (`windows-terminal-settings.json`): Modern default profile configuration.
 *   **VS Code** (`vscode-settings.json` & `vscode-keybindings.json`): Sensible defaults for coding, UI tweaks, and keybindings.
 *   **Git** (`.gitconfig`): Standard global configuration.
-*   **PowerShell** (`Microsoft.PowerShell_profile.ps1`): Custom profile script for improved prompt and aliases.
+*   **PowerShell** (`Microsoft.PowerShell_profile.ps1`): Custom profile script for improved prompt and aliases (now equipped with Starship!).
+*   **Starship** (`starship.toml`): A highly customizable, fast, and informative terminal prompt configuration.
 
 *To use these, copy them to their respective AppData or User directories.*
 
 ## 📜 Scripts
 
+*   `winget_install.ps1`: Automated installer script that leverages `winget` to silently install all standard applications (Firefox, Discord, Spotify, VS Code, Steam, and more) with a single command.
+*   `vscode_extensions.ps1`: A script to easily manage VS Code extensions. Run with `-Export` to backup current extensions to a text file, and `-Import` to install them on a new machine.
+*   `windows_debloat.ps1`: A script to disable Windows telemetry, turn off lock screen ads, disable web search in the Start Menu, and uninstall common bloatware.
+*   `download_utils.ps1`: An automated PowerShell script used to fetch the latest large installers straight from their official sources and place them safely in a `downloadedz` folder to bypass Git size limits.
 *   `restore_w10_context_menu.bat` / `restore_w11_context_menu.bat`: Registry tweaks to easily toggle between the classic Windows 10 context menu and the modern Windows 11 context menu.
-*   `download_utils.ps1`: An automated PowerShell script used to fetch the latest installers for tools like PowerToys, Git, Notepad++, Sysinternals, and WizTree straight from their official sources.
 
 ## 🎨 Themes & Customization
 *   `chrome` & `gloria-theme`: Browser and system theme files.

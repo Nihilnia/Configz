@@ -8,3 +8,10 @@ function prompt {
 }
 
 Write-Host "PowerShell profile loaded." -ForegroundColor Cyan
+
+# Initialize Starship Prompt (Requires Starship to be installed)
+if (Get-Command starship -ErrorAction SilentlyContinue) {
+    Invoke-Expression (&starship init powershell)
+} else {
+    Write-Host "Starship is not installed. Run winget_install.ps1 to install it." -ForegroundColor Yellow
+}
