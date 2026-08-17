@@ -1,3 +1,4 @@
+local mp = require "mp"
 local is_gamemode = false
 local section_name = "gamemode_lock"
 local script_name = mp.get_script_name()

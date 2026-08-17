@@ -43,14 +43,15 @@ Inside the `configs` directory, you'll find custom profiles and configurations f
 
 *To use these, copy them to their respective AppData or User directories.*
 
-## 📜 Scripts
+## 📜 Setup & Scripts
 
-*   `winget_install.ps1`: Automated installer script that leverages `winget` to silently install all standard applications (Firefox, Discord, Spotify, VS Code, Steam, and more) with a single command.
-*   `vscode_extensions.ps1`: A script to easily manage VS Code extensions. Run with `-Export` to backup current extensions to a text file, and `-Import` to install them on a new machine.
-*   `windows_debloat.ps1`: A script to disable Windows telemetry, turn off lock screen ads, disable web search in the Start Menu, and uninstall common bloatware.
+*   **`SetupWizard.exe` (RECOMMENDED)**: A modern, click-to-run setup wizard! It launches a sleek graphical interface letting you select exactly which apps, utilities, and tweaks you want to install on a new machine. 
+*   `setup_wizard.ps1`: The underlying PowerShell WPF script that powers the EXE.
+*   `winget_install.ps1`: Automated installer script that leverages `winget` to silently install standard applications.
+
+*   `windows_debloat.ps1`: A script to disable Windows telemetry, turn off lock screen ads, disable web search in the Start Menu, uninstall common bloatware, and restore the classic Windows 11 Context Menu.
 *   `download_utils.ps1`: An automated PowerShell script used to fetch the latest large installers straight from their official sources and place them safely in a `downloadedz` folder to bypass Git size limits.
-*   `restore_w10_context_menu.bat` / `restore_w11_context_menu.bat`: Registry tweaks to easily toggle between the classic Windows 10 context menu and the modern Windows 11 context menu.
 
-## 🎨 Themes & Customization
+## 🛠️ Included Utilities & Customization
 *   `chrome` & `gloria-theme`: Browser and system theme files.
 *   `A88.png`: Assets/wallpapers.

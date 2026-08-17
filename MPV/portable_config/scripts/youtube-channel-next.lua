@@ -17,7 +17,17 @@ local utils = require 'mp.utils'
 -- ── Config ────────────────────────────────────────────────────────────────────
 -- FIX: use bare "yt-dlp" so it resolves via PATH — no hardcoded absolute path.
 -- yt-dlp must be accessible from PATH (or place yt-dlp.exe next to mpv.exe).
-local YTDLP       = "yt-dlp"
+local package_dir = mp.command_native({"expand-path", "~~/../"})
+local YTDLP = package_dir .. "/yt-dlp.exe"
+local DENO = package_dir .. "/deno.exe"
+if not utils.file_info(YTDLP) then YTDLP = "yt-dlp" end
+local function with_runtime(args)
+    if utils.file_info(DENO) then
+        table.insert(args, 2, "--js-runtimes")
+        table.insert(args, 3, "deno:" .. DENO:gsub("\\\\", "/"))
+    end
+    return args
+end
 local FETCH_COUNT = 30   -- how many channel videos to fetch ahead
 
 -- Delay (seconds) after file-loaded before spawning any yt-dlp subprocess.

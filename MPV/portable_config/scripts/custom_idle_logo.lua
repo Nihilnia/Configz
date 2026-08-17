@@ -4,6 +4,7 @@
 local mp = require 'mp'
 
 local logo_path = mp.command_native({"expand-path", "~~/logo.png"})
+local logo_filter_active = false
 
 local function file_exists(path)
     local f = io.open(path, "r")
@@ -28,14 +29,18 @@ mp.register_event("file-loaded", function()
         -- Force the image to 64x64, then pad it into a 1280x720 black canvas. 
         -- This forces the MPV window to open at a standard 720p default size!
         mp.commandv("vf", "add", "@idlelogo:lavfi=[scale=64:64:force_original_aspect_ratio=decrease,pad=1280:720:-1:-1:color=black]")
+        logo_filter_active = true
         
-        mp.commandv("script-message", "osc-visibility", "never")
+        mp.commandv("script-message", "osc-visibility", "never", "true")
     else
         -- We are playing a real video. Restore normal behavior.
         
         -- Safely remove the logo scaling filter so real videos play normally
-        mp.commandv("vf", "remove", "@idlelogo")
+        if logo_filter_active then
+            mp.commandv("vf", "remove", "@idlelogo")
+            logo_filter_active = false
+        end
         
-        mp.commandv("script-message", "osc-visibility", "auto")
+        mp.commandv("script-message", "osc-visibility", "auto", "true")
     end
 end)

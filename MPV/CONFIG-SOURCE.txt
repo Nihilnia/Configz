@@ -1,0 +1,1 @@
+Authoritative configuration: C:\Users\Nihil\Desktop\MPV\portable_config`r`nC:\Configz\MPV\portable_config is a maintained code mirror. Do not edit both trees independently.`r`n

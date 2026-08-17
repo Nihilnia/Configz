@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-"%~dp0/mpv" --register
+"%~dp0mpv.exe" --register
 if %errorlevel% neq 0 (
     echo Registration failed. Make sure mpv is in the same folder as this script.
     pause

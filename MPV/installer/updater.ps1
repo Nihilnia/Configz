@@ -22,7 +22,7 @@ function Check-7z {
         $null = New-Item -ItemType Directory -Force (Split-Path $fallback7z)
         $download_file = $fallback7z
         Write-Host "Downloading 7zr.exe" -ForegroundColor Green
-        Invoke-WebRequest -Uri "https://www.7-zip.org/a/7zr.exe" -UserAgent $useragent -OutFile $download_file
+        throw "Bundled 7zr.exe is missing; refusing to download an unverified extractor."
     }
     else
     {
@@ -68,9 +68,48 @@ function Check-Mpv {
     return $is_exist
 }
 
+function Get-RemoteSha256($link) {
+    $candidates = @("$link.sha256", "$link.sha256sum")
+    if ($link -match "^https://github\.com/([^/]+)/([^/]+)/releases/download/([^/]+)/([^/]+)$") {
+        $base = "https://github.com/$($matches[1])/$($matches[2])/releases/download/$($matches[3])"
+        $candidates += "$base/SHA2-256SUMS"
+        $candidates += "$base/SHA256SUMS"
+    }
+    foreach ($candidate in $candidates) {
+        try {
+            $r = Invoke-WebRequest -Uri $candidate -UserAgent $useragent -UseBasicParsing -ErrorAction Stop
+            $m = [regex]::Match($r.Content, "(?i)\b[a-f0-9]{64}\b")
+            if ($m.Success) { return $m.Groups[0].Value.ToUpperInvariant() }
+        } catch {}
+    }
+    return $null
+}
+
+function Download-VerifiedFile($filename, $link) {
+    $partial = "$filename.partial"
+    Remove-Item -LiteralPath $partial -Force -ErrorAction SilentlyContinue
+    Invoke-WebRequest -Uri $link -UserAgent $useragent -UseBasicParsing -OutFile $partial -ErrorAction Stop
+    $expected = Get-RemoteSha256 $link
+    if (-not $expected -and $env:MPV_ALLOW_UNVERIFIED_UPDATE -ne "1") {
+        Remove-Item -LiteralPath $partial -Force -ErrorAction SilentlyContinue
+        throw "No SHA-256 checksum asset was available. Set MPV_ALLOW_UNVERIFIED_UPDATE=1 only to accept an unverified update."
+    }
+    if ($expected) {
+        $actual = (Get-FileHash -LiteralPath $partial -Algorithm SHA256).Hash.ToUpperInvariant()
+        if ($actual -ne $expected) {
+            Remove-Item -LiteralPath $partial -Force -ErrorAction SilentlyContinue
+            throw "SHA-256 verification failed. Expected $expected, got $actual."
+        }
+        Write-Host "SHA-256 verified: $filename" -ForegroundColor Green
+    } else {
+        Write-Warning "Proceeding without checksum verification because MPV_ALLOW_UNVERIFIED_UPDATE=1 was set."
+    }
+    Move-Item -LiteralPath $partial -Destination $filename -Force
+}
+
 function Download-Archive ($filename, $link) {
     Write-Host "Downloading" $filename -ForegroundColor Green
-    Invoke-WebRequest -Uri $link -UserAgent $useragent -OutFile $filename
+    Download-VerifiedFile $filename $link
 }
 
 function Download-Ytplugin ($plugin, $version) {
@@ -92,7 +131,7 @@ function Download-Ytplugin ($plugin, $version) {
             $plugin_exe = "youtube-dl.exe"
         }
     }
-    Invoke-WebRequest -Uri $link -UserAgent $useragent -OutFile $plugin_exe
+    Download-VerifiedFile $plugin_exe $link
 }
 
 function Extract-Archive ($file) {

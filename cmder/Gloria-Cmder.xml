@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<key name="Software">
+	<key name="ConEmu">
+		<key name=".Vanilla">
+			<key name="Colors">
+				<value name="Count" type="dword" data="00000001"/>
+				<key name="Palette1">
+					<value name="Name" type="string" data="Gloria"/>
+					<value name="ExtendColors" type="hex" data="00"/>
+					<value name="TextColorIdx" type="hex" data="0f"/>
+					<value name="BackColorIdx" type="hex" data="00"/>
+					<value name="PopTextColorIdx" type="hex" data="0f"/>
+					<value name="PopBackColorIdx" type="hex" data="00"/>
+					<value name="ColorTable00" type="dword" data="00180c00"/>
+					<value name="ColorTable01" type="dword" data="000000cc"/>
+					<value name="ColorTable02" type="dword" data="0000aa2e"/>
+					<value name="ColorTable03" type="dword" data="0000accc"/>
+					<value name="ColorTable04" type="dword" data="00ba520f"/>
+					<value name="ColorTable05" type="dword" data="007700c9"/>
+					<value name="ColorTable06" type="dword" data="008c9c3a"/>
+					<value name="ColorTable07" type="dword" data="00b3b3b3"/>
+					<value name="ColorTable08" type="dword" data="00808080"/>
+					<value name="ColorTable09" type="dword" data="000000ff"/>
+					<value name="ColorTable10" type="dword" data="0000ff40"/>
+					<value name="ColorTable11" type="dword" data="0000ffff"/>
+					<value name="ColorTable12" type="dword" data="00ff901e"/>
+					<value name="ColorTable13" type="dword" data="005044fe"/>
+					<value name="ColorTable14" type="dword" data="00b0c94e"/>
+					<value name="ColorTable15" type="dword" data="00fefefe"/>
+				</key>
+			</key>
+		</key>
+	</key>
+</key>

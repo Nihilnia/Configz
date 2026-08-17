@@ -1,3 +1,4 @@
+local mp = require "mp"
 -- This script automatically loads playlist entries before and after the
 -- currently played file. It does so by scanning the directory a file is
 -- located in when starting playback. It sorts the directory entries
