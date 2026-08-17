@@ -136,12 +136,16 @@
   const observer = new MutationObserver(inject);
   observer.observe(document.body, { childList: true, subtree: true });
 
-  // Use YouTube's native SPA navigation event instead of polling
-  window.addEventListener('yt-navigate-finish', () => {
-    document.getElementById('mpv-ctrl-open')?.remove();
-    document.getElementById('mpv-ctrl-copy')?.remove();
-    inject();
-  });
+  // Fallback and URL change detection
+  let lastUrl = location.href;
+  setInterval(() => {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      document.getElementById('mpv-ctrl-open')?.remove();
+      document.getElementById('mpv-ctrl-copy')?.remove();
+      inject();
+    }
+  }, 500);
 
   inject();
 })();

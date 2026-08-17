@@ -22,7 +22,7 @@ overlay.res_y       = 1080
 local overlay_timer = nil
 
 local FONT     = "Montserrat ExtraBold"
-local CX, CY   = 960, 150   -- screen center in overlay coordinate space
+local CX, CY   = 960, 540   -- screen center in overlay coordinate space
 
 -- Dismiss any active overlay immediately (used before showing a new one)
 local function overlay_clear()
@@ -147,29 +147,6 @@ local last_clipboard_url = nil
 
 local function play_url(raw)
     local final_url, timestamp_secs = clean_url(raw)
-    
-    -- Check if it's the same as currently playing
-    local current_path = mp.get_property("path")
-    if current_path then
-        local current_clean, _ = clean_url(current_path)
-        if current_clean == final_url then
-            if timestamp_secs and timestamp_secs > 0 then
-                mp.commandv("seek", tostring(timestamp_secs), "absolute")
-                mp.set_property("pause", "no")
-                local mins = math.floor(timestamp_secs / 60)
-                local secs = timestamp_secs % 60
-                show_center(
-                    string.format("⏩  Seeked to  %d:%02d", mins, secs),
-                    display_url(final_url),
-                    3
-                )
-            else
-                show_center("Already playing this link", display_url(final_url), 3)
-            end
-            return
-        end
-    end
-
     last_clipboard_url = final_url
     local durl = display_url(final_url)
 
@@ -208,7 +185,6 @@ local function play_url(raw)
     end
 
     mp.commandv("loadfile", final_url)
-    mp.set_property("pause", "no")
 end
 
 local function get_clipboard()
@@ -298,7 +274,7 @@ local function check_auto_clipboard()
         raw = raw:match("^%s*(.-)%s*$")
         if raw == "" then return end
         
-        if raw:match("^https?://.*youtube%.com/") or raw:match("^https?://.*youtu%.be/") or raw:match("^https?://.*twitch%.tv/") or raw:match("^https?://.*vimeo%.com/") then
+        if raw:match("^https?://") then
             local final_url, _ = clean_url(raw)
             if final_url ~= last_clipboard_url then
                 last_clipboard_url = final_url

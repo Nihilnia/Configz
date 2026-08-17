@@ -1,0 +1,201 @@
+/* ============================================================
+   Gloria for MarkText
+   Port of the "Gloria" VS Code theme (publisher: Nihil)
+   Paste this into Preferences -> Theme -> Custom CSS
+   ============================================================ */
+
+:root {
+  /* accent / theme color -> royal blue selection from Gloria */
+  --themeColor: rgba(15, 82, 186, 1);
+  --themeColor90: rgba(15, 82, 186, .9);
+  --themeColor80: rgba(15, 82, 186, .8);
+  --themeColor70: rgba(15, 82, 186, .7);
+  --themeColor60: rgba(15, 82, 186, .6);
+  --themeColor50: rgba(15, 82, 186, .5);
+  --themeColor40: rgba(15, 82, 186, .4);
+  --themeColor30: rgba(15, 82, 186, .3);
+  --themeColor20: rgba(15, 82, 186, .2);
+  --themeColor10: rgba(15, 82, 186, .1);
+
+  --highlightThemeColor: #40ff00;
+  --highlightColor: #1e90ff20;
+  --selectionColor: #0f52ba60;
+
+  /* body text */
+  --editorColor: #fefefe;
+  --editorColor80: #fefefecc;
+  --editorColor60: rgba(254, 254, 254, .6);
+  --editorColor50: rgba(254, 254, 254, .5);
+  --editorColor40: rgba(254, 254, 254, .4);
+  --editorColor30: rgba(254, 254, 254, .3);
+  --editorColor10: rgba(254, 254, 254, .1);
+  --editorColor04: rgba(254, 254, 254, .04);
+
+  --editorBgColor: #000c18;
+  --deleteColor: #fe4450;
+  --iconColor: rgba(255, 255, 255, .7);
+
+  --codeBgColor: #030306;
+  --codeBlockBgColor: #030306;
+  --footnoteBgColor: rgba(3, 3, 6, .6);
+  --inputBgColor: #030306;
+  --focusColor: #1e90ff;
+
+  --buttonFontColor: #fefefe;
+  --buttonBgColor: linear-gradient(#000c18, #030306);
+  --buttonBorder: 1px solid #1f212b;
+  --buttonShadow: none;
+  --buttonFontColorHover: #ffffff;
+  --buttonBgColorHover: linear-gradient(#0F52BA, #030306);
+  --buttonBorderHover: var(--buttonBorder);
+  --buttonFontColorActive: var(--buttonFontColor);
+  --buttonBgColorActive: #030306;
+  --buttonBorderActive: var(--buttonBorder);
+  --buttonFocusBorder: 1px solid #1e90ff;
+
+  --buttonPrimaryFontColor: #ffffff;
+  --buttonPrimaryBgColor: linear-gradient(#0F52BA, #000c18);
+  --buttonPrimaryBorder: 1px solid #1f212b;
+  --buttonPrimaryShadow: none;
+  --buttonPrimaryFontColorHover: var(--buttonPrimaryFontColor);
+  --buttonPrimaryBgColorHover: linear-gradient(#1e6fe0, #0F52BA);
+  --buttonPrimaryBorderHover: var(--buttonPrimaryBorder);
+  --buttonPrimaryFontColorActive: var(--buttonPrimaryFontColor);
+  --buttonPrimaryBgColorActive: #0F52BA;
+  --buttonPrimaryBorderActive: var(--buttonPrimaryBorder);
+  --buttonPrimaryFocusBorder: none;
+  --buttonPrimaryFocusShadow: inset 0 0 0 1px rgba(3,3,6,0.6), 0 0 0 1px #1e90ff;
+
+  --tableBorderColor: #1f212b;
+
+  /* sidebar / file tree / floating panels */
+  --sideBarColor: #fefefe99;
+  --sideBarIconColor: var(--iconColor);
+  --sideBarTitleColor: #fefefe;
+  --sideBarTextColor: #fefefe99;
+  --sideBarBgColor: #000c18;
+  --sideBarItemHoverBgColor: #030306;
+  --itemBgColor: #000c18;
+
+  --floatFontColor: #fefefe;
+  --floatBgColor: #030306;
+  --floatHoverColor: #000c18;
+  --floatBorderColor: #1f212b;
+  --floatShadow: rgba(0, 0, 0, 0.5);
+  --maskColor: rgba(0, 0, 0, .75);
+
+  --editorAreaWidth: 750px;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-corner {
+  background: var(--editorBgColor);
+}
+::-webkit-scrollbar-thumb {
+  background: #1f212b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0F52BA;
+}
+
+/* ---- title bar / tabs ---- */
+.tabs-container > li.active:after {
+  background: #1e90ff !important;
+}
+.tabs-container svg.close-icon #unsaved-circle-icon {
+  fill: #40ff00;
+}
+.left-column ul > li.active > svg {
+  fill: #1e90ff !important;
+}
+
+/* ---- inline code ---- */
+code:not([class*="language-"]) {
+  color: #40ff00 !important;
+  background: var(--codeBgColor) !important;
+}
+
+/* ---- code block chrome ---- */
+:not(pre) > code[class*="language-"],
+pre:not(.CodeMirror-line),
+pre[class*="language-"],
+pre.ag-paragraph {
+  background: var(--codeBlockBgColor) !important;
+  border: 1px solid #1f212b !important;
+}
+
+/* ==============================================================
+   Prism.js token colors (fenced code blocks) — Gloria palette,
+   with the glow applied only to keywords/brackets as in the
+   original VS Code theme (color lives near-white, hue in the
+   text-shadow so it doesn't fight legibility).
+   ============================================================== */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #808080 !important;
+  font-style: italic;
+}
+
+.token.string,
+.token.template-string,
+.token.attr-value {
+  color: #40ff00 !important;
+}
+
+.token.keyword,
+.token.storage,
+.token.storage.type,
+.token.operator.new {
+  color: #fdfdfd !important;
+  text-shadow: 0 0 6px #1e90ff90;
+}
+
+.token.function,
+.token.method {
+  color: #fdfdfd !important;
+}
+
+.token.class-name,
+.token.type,
+.token.builtin {
+  color: #4ec9b0 !important;
+}
+
+.token.variable,
+.token.parameter,
+.token.property,
+.token.property-access {
+  color: #ff0000 !important;
+}
+
+.token.number,
+.token.boolean {
+  color: #ffff00 !important;
+}
+
+.token.punctuation,
+.token.brace {
+  color: #1e90ff !important;
+  text-shadow: 0 0 6px #1e90ff70;
+}
+
+.token.tag,
+.token.selector {
+  color: #569CD6 !important;
+}
+
+.token.regex,
+.token.important,
+.token.escape {
+  color: #D16969 !important;
+}
+
+.token.constant {
+  color: #fefefe !important;
+}
+
+.token.operator {
+  color: #fefefe !important;
+}
